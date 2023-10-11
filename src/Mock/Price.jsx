@@ -1,0 +1,58 @@
+export const Price = [
+  {
+    id: "1",
+    name: "Mini",
+    Mrp: "$94",
+    Length: 'Length:16.5"',
+    Height: "Height:",
+  },
+  {
+    id: "2",
+    name: "Small",
+    Mrp: "$132",
+    Length: 'Length:25"',
+    Height: "Height:",
+  },
+  {
+    id: "3",
+    name: "Large",
+    Mrp: "$189",
+    Length: 'Length:38"',
+    Height: "Height:",
+  },
+  {
+    id: "4",
+    name: "XX large",
+    Mrp: "$236",
+    Length: 'Length:64"',
+    Height: "Height:",
+  },
+  {
+    id: "5",
+    name: "Extra Small",
+    Mrp: "$106",
+    Length: 'Length:20"',
+    Height: "Height:",
+  },
+  {
+    id: "6",
+    name: "Medium",
+    Mrp: "$149",
+    Length: 'Length:30"',
+    Height: "Height:",
+  },
+  {
+    id: "7",
+    name: " X large",
+    Mrp: "$201",
+    Length: 'Length:48"',
+    Height: "Height:",
+  },
+  {
+    id: "8",
+    name: "Supersized",
+    Mrp: "$315",
+    Length: 'Length:85"',
+    Height: "Height:",
+  },
+];
