@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import landscape1 from "../Images/landscape1.jpg";
 import { ColorSelector } from "./Mobile/ColorSelector";
 import { COLORS } from "./Mobile/constants";
@@ -22,6 +22,51 @@ const Text = () => {
   const handleFontChange = (newFont) => {
     setFontFamily(newFont);
   };
+  const tracker = useRef({
+  dragging: false,
+  pos: {},
+});
+const elementRef = useRef(null);
+
+useEffect(() => {
+  if (!elementRef.current) return;
+  const element = elementRef.current;
+
+  const mouseDownHandler = (e) => {
+    tracker.current.dragging = true;
+    tracker.current.pos.x = e.clientX - element.getBoundingClientRect().left;
+    tracker.current.pos.y = element.getBoundingClientRect().top;
+    element.style.cursor = "grabbing";
+  };
+
+  element.addEventListener("mousedown", mouseDownHandler);
+
+  const mouseMoveHandler = (e) => {
+    console.log(tracker.current.dragging, tracker.current.pos);
+    if (tracker.current.dragging) {
+      const x = e.clientX - tracker.current.pos.x;
+      const y = e.clientY - tracker.current.pos.y;
+      element.style.left = `${x}px`;
+      element.style.top = `${y}px`;
+    }
+  };
+  element.addEventListener("mousemove", mouseMoveHandler);
+
+  const mouseUpHandler = () => {
+    if (tracker.current.dragging) {
+      tracker.current.dragging = false;
+      element.style.cursor = "grab";
+    }
+  };
+  document.addEventListener("mouseup", mouseUpHandler);
+
+  return () => {
+    element.removeEventListener("mousedown", mouseDownHandler);
+    element.removeEventListener("mousemove", mouseMoveHandler);
+    element.removeEventListener("mouseup", mouseUpHandler);
+  };
+}, []);
+
 
   return (
     <div className=" lg:flex hidden  p-2">
@@ -32,6 +77,7 @@ const Text = () => {
         }}
       >
         <div
+          ref={elementRef}
           className="text-[4rem] text-white bg-opacity-60 backdrop:blur-md p-5 rounded-lg absolute left-[40%] top-[30%]   text-center "
           style={{
             fontFamily: fontFamily,
